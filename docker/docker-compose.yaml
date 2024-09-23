@@ -687,6 +687,21 @@ services:
     volumes:
       - ./volumes/unstructured:/app/data
 
+
+  # https://github.com/mudler/LocalAI
+  # 940115 添加 Rerank 使用
+  localai:
+    image: quay.io/go-skynet/local-ai:latest
+    container_name: localai
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./volumes/localai/models:/models  # 將本地模型目錄掛載到容器內
+    environment:
+      - API_KEY=123456  # 如果需要使用 API key，請在這裡設置
+
+
+
 networks:
   # create a network between sandbox, api and ssrf_proxy, and can not access outside.
   ssrf_proxy_network:
